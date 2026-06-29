@@ -254,9 +254,9 @@ const Index = () => {
       <div
         className="fixed inset-0 z-0"
         style={{
-          backgroundImage: `url(https://cdn.poehali.dev/projects/8b450fac-d3b7-4362-98c8-dede2f991198/bucket/f7756b52-eafa-4459-8fbc-36917dc031f1.png)`,
+          backgroundImage: `url(https://cdn.poehali.dev/projects/8b450fac-d3b7-4362-98c8-dede2f991198/files/c04f896e-9cfa-4ac1-ab15-b7944226db62.jpg)`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center top',
+          backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
           opacity: 0.35,
         }}
