@@ -18,6 +18,11 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				display: ['Cormorant', 'serif'],
+				body: ['Montserrat', 'sans-serif'],
+				hand: ['Caveat', 'cursive'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -70,25 +75,54 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'fade-up': {
+					'0%': { opacity: '0', transform: 'translateY(40px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
+				},
+				'fall': {
+					'0%': { transform: 'translateY(-10vh) rotate(0deg)', opacity: '0' },
+					'10%': { opacity: '0.9' },
+					'100%': { transform: 'translateY(110vh) rotate(360deg)', opacity: '0' }
+				},
+				'float-up': {
+					'0%': { transform: 'translateY(0) scale(1)', opacity: '0' },
+					'15%': { opacity: '0.8' },
+					'100%': { transform: 'translateY(-110vh) scale(1.3)', opacity: '0' }
+				},
+				'breathe': {
+					'0%, 100%': { transform: 'scale(1)' },
+					'50%': { transform: 'scale(1.06)' }
+				},
+				'shimmer': {
+					'0%': { backgroundPosition: '-200% center' },
+					'100%': { backgroundPosition: '200% center' }
+				},
+				'sway': {
+					'0%, 100%': { transform: 'rotate(-4deg)' },
+					'50%': { transform: 'rotate(4deg)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-up': 'fade-up 0.9s cubic-bezier(0.22,1,0.36,1) forwards',
+				'fade-in': 'fade-in 1.2s ease forwards',
+				'fall': 'fall linear infinite',
+				'float-up': 'float-up linear infinite',
+				'breathe': 'breathe 5s ease-in-out infinite',
+				'shimmer': 'shimmer 4s linear infinite',
+				'sway': 'sway 4s ease-in-out infinite'
 			}
 		}
 	},
