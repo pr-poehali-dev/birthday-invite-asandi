@@ -318,10 +318,11 @@ const Index = () => {
                 {[
                   { icon: 'Calendar', label: 'Дата', val: '23 августа 2026' },
                   { icon: 'Clock', label: 'Время', val: 'будет сообщено позже' },
-                  { icon: 'MapPin', label: 'Место', val: 'будет сообщено позже' },
+                  { icon: 'Sunrise', label: 'Утренний столик', val: 'с. Григорьевка, ул. Победы 3' },
+                  { icon: 'MapPin', label: 'Основной банкет', val: 'г. Оренбург, ул. Победы 114/4 — Инфинити, летняя веранда' },
                 ].map((row) => (
                   <div key={row.label} className="flex items-center justify-center gap-3">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[hsl(var(--blush))]/30">
+                    <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-[hsl(var(--blush))]/30">
                       <Icon name={row.icon} size={20} className="text-[hsl(var(--rose))]" />
                     </span>
                     <div className="text-left">
