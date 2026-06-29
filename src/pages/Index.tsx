@@ -258,7 +258,7 @@ const Index = () => {
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
-          opacity: 0.35,
+          opacity: 0.7,
         }}
       />
       <ConfettiBalloons />
