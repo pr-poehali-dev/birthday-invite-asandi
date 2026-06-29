@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Icon from '@/components/ui/icon';
 
 const EVENT_DATE = new Date('2026-08-23T00:00:00').getTime();
-const HERO_IMG = 'https://cdn.poehali.dev/projects/8b450fac-d3b7-4362-98c8-dede2f991198/files/db75a239-a25c-42a5-a3cf-688fe8f8e9f9.jpg';
+const HERO_IMG = 'https://cdn.poehali.dev/projects/8b450fac-d3b7-4362-98c8-dede2f991198/bucket/8dc2b7a4-bf4b-4383-b443-104219ce20a4.png';
 
 const useCountdown = () => {
   const [t, setT] = useState({ d: 0, h: 0, m: 0, s: 0 });
