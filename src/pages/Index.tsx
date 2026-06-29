@@ -211,14 +211,24 @@ const Index = () => {
               Сможете ли вы прийти?
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <button className="group flex items-center gap-2 rounded-full bg-[hsl(var(--rose))] px-8 py-4 font-body font-medium text-white shadow-lg shadow-[hsl(var(--rose))]/30 transition-transform hover:scale-105">
+              <a
+                href={`https://wa.me/79681286867?text=${encodeURIComponent('Здравствуйте! Я подтверждаю своё присутствие на празднике Асянди Аделины Ким 💗')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 rounded-full bg-[hsl(var(--rose))] px-8 py-4 font-body font-medium text-white shadow-lg shadow-[hsl(var(--rose))]/30 transition-transform hover:scale-105"
+              >
                 <Icon name="Heart" size={18} className="fill-white transition-transform group-hover:scale-125" />
                 Я приду
-              </button>
-              <button className="flex items-center gap-2 rounded-full border border-[hsl(var(--blush))] bg-white/70 px-8 py-4 font-body font-medium text-[hsl(var(--foreground))]/70 backdrop-blur-md transition-transform hover:scale-105">
+              </a>
+              <a
+                href={`https://wa.me/79681286867?text=${encodeURIComponent('Здравствуйте! К сожалению, не смогу присутствовать на празднике Асянди Аделины Ким 🤍')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 rounded-full border border-[hsl(var(--blush))] bg-white/70 px-8 py-4 font-body font-medium text-[hsl(var(--foreground))]/70 backdrop-blur-md transition-transform hover:scale-105"
+              >
                 <Icon name="Heart" size={18} className="text-[hsl(var(--blush))]" />
                 Не смогу прийти
-              </button>
+              </a>
             </div>
           </Reveal>
         </section>
