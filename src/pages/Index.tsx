@@ -60,65 +60,70 @@ const SakuraPetal = ({ style }: { style: React.CSSProperties }) => (
   </svg>
 );
 
-const Petals = () => {
-  const items = Array.from({ length: 28 });
-  return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {items.map((_, i) => {
-        const left = Math.random() * 110 - 5;
-        const dur = 10 + Math.random() * 12;
-        const delay = Math.random() * 15;
-        const size = 22 + Math.random() * 24;
-        const drift = (Math.random() - 0.5) * 120;
-        const rotStart = Math.random() * 360;
-        return (
-          <div
-            key={i}
-            style={{
-              position: 'absolute',
-              left: `${left}vw`,
-              top: '-60px',
-              animationDuration: `${dur}s`,
-              animationDelay: `-${delay}s`,
-              animationTimingFunction: 'linear',
-              animationIterationCount: 'infinite',
-              animation: `sakura-fall-${i % 3} ${dur}s linear -${delay}s infinite`,
-            }}
-          >
-            <SakuraPetal
-              style={{
-                width: size,
-                height: size,
-                transform: `rotate(${rotStart}deg)`,
-                filter: 'drop-shadow(0 2px 4px rgba(244,160,187,0.3))',
-              }}
-            />
-          </div>
-        );
-      })}
-      <style>{`
-        @keyframes sakura-fall-0 {
-          0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-          5%   { opacity: 1; }
-          100% { transform: translateY(110vh) translateX(80px) rotate(540deg); opacity: 0.2; }
-        }
-        @keyframes sakura-fall-1 {
-          0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-          5%   { opacity: 0.9; }
-          50%  { transform: translateY(55vh) translateX(-60px) rotate(270deg); }
-          100% { transform: translateY(110vh) translateX(40px) rotate(600deg); opacity: 0.1; }
-        }
-        @keyframes sakura-fall-2 {
-          0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-          8%   { opacity: 0.85; }
-          40%  { transform: translateY(40vh) translateX(50px) rotate(200deg); }
-          70%  { transform: translateY(75vh) translateX(-30px) rotate(400deg); }
-          100% { transform: translateY(110vh) translateX(20px) rotate(580deg); opacity: 0.15; }
-        }
-      `}</style>
-    </div>
-  );
-};
+const PETALS_CONFIG = Array.from({ length: 24 }, (_, i) => ({
+  left: ((i * 4.3) % 108) - 4,
+  dur: 18 + (i * 2.7) % 14,
+  delay: (i * 1.9) % 20,
+  size: 20 + (i * 3) % 22,
+  rotStart: (i * 47) % 360,
+  type: i % 3,
+}));
+
+const Petals = () => (
+  <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    {PETALS_CONFIG.map((p, i) => (
+      <div
+        key={i}
+        style={{
+          position: 'absolute',
+          left: `${p.left}vw`,
+          top: '-60px',
+          animation: `sp-fall-${p.type} ${p.dur}s cubic-bezier(0.37,0,0.63,1) -${p.delay}s infinite`,
+          willChange: 'transform, opacity',
+        }}
+      >
+        <SakuraPetal
+          style={{
+            width: p.size,
+            height: p.size,
+            animationDuration: `${p.dur * 0.7}s`,
+            animationDelay: `-${p.delay}s`,
+            animationTimingFunction: 'ease-in-out',
+            animationIterationCount: 'infinite',
+            animation: `sp-spin ${p.dur * 0.8}s ease-in-out -${p.delay * 0.5}s infinite`,
+            filter: 'drop-shadow(0 3px 6px rgba(244,160,187,0.25))',
+          }}
+        />
+      </div>
+    ))}
+    <style>{`
+      @keyframes sp-fall-0 {
+        0%   { transform: translateY(-5vh) translateX(0px);   opacity: 0; }
+        6%   { opacity: 0.85; }
+        45%  { transform: translateY(50vh)  translateX(35px);  opacity: 0.8; }
+        100% { transform: translateY(112vh) translateX(-15px); opacity: 0; }
+      }
+      @keyframes sp-fall-1 {
+        0%   { transform: translateY(-5vh) translateX(0px);   opacity: 0; }
+        6%   { opacity: 0.75; }
+        35%  { transform: translateY(38vh)  translateX(-45px); opacity: 0.7; }
+        70%  { transform: translateY(72vh)  translateX(25px);  opacity: 0.65; }
+        100% { transform: translateY(112vh) translateX(-10px); opacity: 0; }
+      }
+      @keyframes sp-fall-2 {
+        0%   { transform: translateY(-5vh) translateX(0px);   opacity: 0; }
+        8%   { opacity: 0.8; }
+        30%  { transform: translateY(30vh)  translateX(50px);  opacity: 0.75; }
+        60%  { transform: translateY(65vh)  translateX(10px);  opacity: 0.7; }
+        100% { transform: translateY(112vh) translateX(30px);  opacity: 0; }
+      }
+      @keyframes sp-spin {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    `}</style>
+  </div>
+);
 
 const Index = () => {
   const { d, h, m, s } = useCountdown();
