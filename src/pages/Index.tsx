@@ -256,7 +256,7 @@ const Index = () => {
         style={{
           backgroundImage: `url(https://cdn.poehali.dev/projects/8b450fac-d3b7-4362-98c8-dede2f991198/files/c04f896e-9cfa-4ac1-ab15-b7944226db62.jpg)`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center center',
+          backgroundPosition: 'center bottom',
           backgroundRepeat: 'no-repeat',
           opacity: 0.7,
         }}
