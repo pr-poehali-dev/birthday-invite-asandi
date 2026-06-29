@@ -212,7 +212,7 @@ const Index = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href={`https://wa.me/79000674304?text=${encodeURIComponent('Здравствуйте! Я подтверждаю своё присутствие на празднике Асянди Аделины Ким 💗')}`}
+                href={`https://wa.me/79000674304?text=${encodeURIComponent('Здравствуйте!\nЯ подтверждаю своё присутствие на празднике Асянди Аделины')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-2 rounded-full bg-[hsl(var(--rose))] px-8 py-4 font-body font-medium text-white shadow-lg shadow-[hsl(var(--rose))]/30 transition-transform hover:scale-105"
@@ -221,7 +221,7 @@ const Index = () => {
                 Я приду
               </a>
               <a
-                href={`https://wa.me/79000674304?text=${encodeURIComponent('Здравствуйте! К сожалению, не смогу присутствовать на празднике Асянди Аделины Ким 🤍')}`}
+                href={`https://wa.me/79000674304?text=${encodeURIComponent('Здравствуйте!\nК сожалению, не смогу присутствовать на празднике')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 rounded-full border border-[hsl(var(--blush))] bg-white/70 px-8 py-4 font-body font-medium text-[hsl(var(--foreground))]/70 backdrop-blur-md transition-transform hover:scale-105"
