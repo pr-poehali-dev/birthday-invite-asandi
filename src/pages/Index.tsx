@@ -251,7 +251,16 @@ const Index = () => {
 
   return (
     <div className="grain relative min-h-screen overflow-x-hidden bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
-      <div className="fixed inset-0 z-0 bg-[radial-gradient(circle_at_20%_15%,hsl(340_60%_94%),transparent_45%),radial-gradient(circle_at_85%_70%,hsl(38_70%_92%),transparent_45%)]" />
+      <div
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: `url(https://cdn.poehali.dev/projects/8b450fac-d3b7-4362-98c8-dede2f991198/bucket/f7756b52-eafa-4459-8fbc-36917dc031f1.png)`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center top',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.35,
+        }}
+      />
       <ConfettiBalloons />
 
       <main className="relative z-10">
