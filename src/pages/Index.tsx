@@ -48,39 +48,74 @@ const Reveal = ({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   );
 };
 
+const SakuraPetal = ({ style }: { style: React.CSSProperties }) => (
+  <svg viewBox="0 0 40 40" style={style} xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="20" cy="12" rx="9" ry="13" fill="#f9b8cc" opacity="0.85" transform="rotate(0 20 20)" />
+    <ellipse cx="20" cy="12" rx="9" ry="13" fill="#f4a0bb" opacity="0.7" transform="rotate(72 20 20)" />
+    <ellipse cx="20" cy="12" rx="9" ry="13" fill="#f9b8cc" opacity="0.85" transform="rotate(144 20 20)" />
+    <ellipse cx="20" cy="12" rx="9" ry="13" fill="#f4a0bb" opacity="0.75" transform="rotate(216 20 20)" />
+    <ellipse cx="20" cy="12" rx="9" ry="13" fill="#f9b8cc" opacity="0.85" transform="rotate(288 20 20)" />
+    <circle cx="20" cy="20" r="4" fill="#fce4ec" />
+    <circle cx="20" cy="20" r="2" fill="#f48fb1" />
+  </svg>
+);
+
 const Petals = () => {
-  const items = Array.from({ length: 22 });
+  const items = Array.from({ length: 28 });
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
       {items.map((_, i) => {
-        const isHeart = i % 4 === 0;
-        const left = Math.random() * 100;
-        const dur = 9 + Math.random() * 9;
-        const delay = Math.random() * 12;
-        const size = 8 + Math.random() * 12;
+        const left = Math.random() * 110 - 5;
+        const dur = 10 + Math.random() * 12;
+        const delay = Math.random() * 15;
+        const size = 22 + Math.random() * 24;
+        const drift = (Math.random() - 0.5) * 120;
+        const rotStart = Math.random() * 360;
         return (
           <div
             key={i}
-            className={isHeart ? 'absolute animate-float-up' : 'absolute animate-fall'}
             style={{
+              position: 'absolute',
               left: `${left}vw`,
-              bottom: isHeart ? '-5vh' : 'auto',
-              top: isHeart ? 'auto' : '-5vh',
+              top: '-60px',
               animationDuration: `${dur}s`,
               animationDelay: `-${delay}s`,
+              animationTimingFunction: 'linear',
+              animationIterationCount: 'infinite',
+              animation: `sakura-fall-${i % 3} ${dur}s linear -${delay}s infinite`,
             }}
           >
-            {isHeart ? (
-              <Icon name="Heart" className="text-[hsl(var(--rose))] fill-[hsl(var(--blush))]" size={size} />
-            ) : (
-              <div
-                style={{ width: size, height: size }}
-                className="rounded-full bg-[hsl(var(--blush))] opacity-70"
-              />
-            )}
+            <SakuraPetal
+              style={{
+                width: size,
+                height: size,
+                transform: `rotate(${rotStart}deg)`,
+                filter: 'drop-shadow(0 2px 4px rgba(244,160,187,0.3))',
+              }}
+            />
           </div>
         );
       })}
+      <style>{`
+        @keyframes sakura-fall-0 {
+          0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+          5%   { opacity: 1; }
+          100% { transform: translateY(110vh) translateX(80px) rotate(540deg); opacity: 0.2; }
+        }
+        @keyframes sakura-fall-1 {
+          0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+          5%   { opacity: 0.9; }
+          50%  { transform: translateY(55vh) translateX(-60px) rotate(270deg); }
+          100% { transform: translateY(110vh) translateX(40px) rotate(600deg); opacity: 0.1; }
+        }
+        @keyframes sakura-fall-2 {
+          0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+          8%   { opacity: 0.85; }
+          40%  { transform: translateY(40vh) translateX(50px) rotate(200deg); }
+          70%  { transform: translateY(75vh) translateX(-30px) rotate(400deg); }
+          100% { transform: translateY(110vh) translateX(20px) rotate(580deg); opacity: 0.15; }
+        }
+      `}</style>
     </div>
   );
 };
