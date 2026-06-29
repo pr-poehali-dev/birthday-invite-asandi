@@ -201,6 +201,45 @@ const ConfettiBalloons = () => (
   </div>
 );
 
+const FlipNumber = ({ value }: { value: number }) => {
+  const [display, setDisplay] = useState(value);
+  const [anim, setAnim] = useState(false);
+
+  useEffect(() => {
+    if (value === display) return;
+    setAnim(true);
+    const t = setTimeout(() => {
+      setDisplay(value);
+      setAnim(false);
+    }, 300);
+    return () => clearTimeout(t);
+  }, [value]);
+
+  return (
+    <>
+      <style>{`
+        @keyframes flip-out {
+          0%   { transform: translateY(0) scaleY(1); opacity: 1; }
+          100% { transform: translateY(-12px) scaleY(0.6); opacity: 0; }
+        }
+        @keyframes flip-in {
+          0%   { transform: translateY(12px) scaleY(0.6); opacity: 0; }
+          100% { transform: translateY(0) scaleY(1); opacity: 1; }
+        }
+        .flip-out { animation: flip-out 0.3s cubic-bezier(0.4,0,0.2,1) forwards; }
+        .flip-in  { animation: flip-in  0.3s cubic-bezier(0.4,0,0.2,1) forwards; }
+      `}</style>
+      <span
+        key={display}
+        className={`font-display text-4xl font-semibold text-[hsl(var(--rose))] tabular-nums sm:text-5xl ${anim ? 'flip-out' : 'flip-in'}`}
+        style={{ display: 'inline-block', lineHeight: 1 }}
+      >
+        {String(display).padStart(2, '0')}
+      </span>
+    </>
+  );
+};
+
 const Index = () => {
   const { d, h, m, s } = useCountdown();
   const units = [
@@ -306,11 +345,9 @@ const Index = () => {
           <div className="mx-auto flex max-w-lg flex-wrap justify-center gap-4">
             {units.map((u, i) => (
               <Reveal key={u.l} delay={i * 120}>
-                <div className="flex h-24 w-24 flex-col items-center justify-center rounded-3xl border border-white/60 bg-white/70 shadow-[0_15px_40px_-15px_hsl(340_50%_70%/0.5)] backdrop-blur-md sm:h-28 sm:w-28">
-                  <span className="font-display text-4xl font-semibold text-[hsl(var(--rose))] sm:text-5xl tabular-nums">
-                    {String(u.v).padStart(2, '0')}
-                  </span>
-                  <span className="text-xs uppercase tracking-widest text-[hsl(var(--foreground))]/50">{u.l}</span>
+                <div className="flex h-24 w-24 flex-col items-center justify-center rounded-full border border-white/70 bg-white/75 shadow-[0_15px_40px_-10px_hsl(340_50%_70%/0.45)] backdrop-blur-md sm:h-28 sm:w-28">
+                  <FlipNumber value={u.v} />
+                  <span className="mt-1 text-[10px] uppercase tracking-widest text-[hsl(var(--foreground))]/45">{u.l}</span>
                 </div>
               </Reveal>
             ))}
