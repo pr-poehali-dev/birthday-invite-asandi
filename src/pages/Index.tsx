@@ -125,6 +125,82 @@ const Petals = () => (
   </div>
 );
 
+const CONFETTI_CONFIG = Array.from({ length: 40 }, (_, i) => {
+  const colors = ['#f9b8cc', '#fad4e4', '#fce4ec', '#ffe082', '#b2dfdb', '#f48fb1', '#fff9c4', '#f8bbd0'];
+  const shapes = ['circle', 'rect', 'balloon'];
+  return {
+    left: (i * 2.55) % 100,
+    dur: 6 + (i * 0.7) % 7,
+    delay: (i * 0.55) % 8,
+    size: 8 + (i * 1.3) % 14,
+    color: colors[i % colors.length],
+    shape: shapes[i % 3],
+    rot: (i * 37) % 360,
+  };
+});
+
+const ConfettiBalloons = () => (
+  <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    {CONFETTI_CONFIG.map((c, i) => (
+      <div
+        key={i}
+        style={{
+          position: 'absolute',
+          left: `${c.left}vw`,
+          top: c.shape === 'balloon' ? '110vh' : '-30px',
+          animation: c.shape === 'balloon'
+            ? `balloon-rise ${c.dur + 4}s cubic-bezier(0.25,0.46,0.45,0.94) -${c.delay}s infinite`
+            : `confetti-fall ${c.dur}s cubic-bezier(0.37,0,0.63,1) -${c.delay}s infinite`,
+          willChange: 'transform, opacity',
+        }}
+      >
+        {c.shape === 'balloon' ? (
+          <svg width={c.size + 12} height={c.size + 20} viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg"
+            style={{ animation: `balloon-sway ${3 + i % 3}s ease-in-out -${c.delay}s infinite` }}>
+            <ellipse cx="14" cy="13" rx="12" ry="13" fill={c.color} opacity="0.85" />
+            <ellipse cx="10" cy="8" rx="4" ry="3" fill="white" opacity="0.3" />
+            <polygon points="12,26 14,30 16,26" fill={c.color} opacity="0.7" />
+            <line x1="14" y1="30" x2="14" y2="40" stroke={c.color} strokeWidth="1.2" opacity="0.6" />
+          </svg>
+        ) : c.shape === 'circle' ? (
+          <div style={{
+            width: c.size, height: c.size,
+            borderRadius: '50%',
+            background: c.color,
+            opacity: 0.8,
+            transform: `rotate(${c.rot}deg)`,
+          }} />
+        ) : (
+          <div style={{
+            width: c.size * 0.6, height: c.size * 1.2,
+            borderRadius: 2,
+            background: c.color,
+            opacity: 0.75,
+            transform: `rotate(${c.rot}deg)`,
+          }} />
+        )}
+      </div>
+    ))}
+    <style>{`
+      @keyframes confetti-fall {
+        0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+        5%   { opacity: 1; }
+        50%  { transform: translateY(50vh) translateX(30px) rotate(180deg); opacity: 0.85; }
+        100% { transform: translateY(110vh) translateX(-20px) rotate(360deg); opacity: 0; }
+      }
+      @keyframes balloon-rise {
+        0%   { transform: translateY(0) translateX(0); opacity: 0; }
+        8%   { opacity: 0.9; }
+        100% { transform: translateY(-120vh) translateX(20px); opacity: 0; }
+      }
+      @keyframes balloon-sway {
+        0%, 100% { transform: rotate(-6deg); }
+        50%       { transform: rotate(6deg); }
+      }
+    `}</style>
+  </div>
+);
+
 const Index = () => {
   const { d, h, m, s } = useCountdown();
   const units = [
@@ -138,6 +214,7 @@ const Index = () => {
     <div className="grain relative min-h-screen overflow-x-hidden bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
       <div className="fixed inset-0 z-0 bg-[radial-gradient(circle_at_20%_15%,hsl(340_60%_94%),transparent_45%),radial-gradient(circle_at_85%_70%,hsl(38_70%_92%),transparent_45%)]" />
       <Petals />
+      <ConfettiBalloons />
 
       <main className="relative z-10">
         {/* HERO */}
