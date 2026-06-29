@@ -213,7 +213,6 @@ const Index = () => {
   return (
     <div className="grain relative min-h-screen overflow-x-hidden bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
       <div className="fixed inset-0 z-0 bg-[radial-gradient(circle_at_20%_15%,hsl(340_60%_94%),transparent_45%),radial-gradient(circle_at_85%_70%,hsl(38_70%_92%),transparent_45%)]" />
-      <Petals />
       <ConfettiBalloons />
 
       <main className="relative z-10">
